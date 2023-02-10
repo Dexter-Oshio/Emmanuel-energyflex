@@ -4,7 +4,7 @@ import time
 import paho.mqtt.client as mqtt
 
 # Set Mosquitto (MQTT) parameters
-broker_address = "localhost"
+broker_address = "broker.emqx.io"
 port = 1883
 topic = "sensor_data"
 
