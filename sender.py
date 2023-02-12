@@ -1,20 +1,19 @@
-import requests
 import random
 import time
 import paho.mqtt.client as mqtt
 
 # Set Mosquitto (MQTT) parameters
-broker_address = "broker.emqx.io"
+broker_address = "broker.mqttdashboard.com"
 port = 1883
-topic = "sensor_data"
+topic = "iot/data"
 
 
 # Create a function to publish simulated sensor data
 def publish_data():
     # Generate simulated sensor data
-    data = str(random.randint(0, 100))
-    print("Publishing data: ", data)
-
+    data = str(random.randint(100, 350))
+    client.publish(topic, data)
+    print("Data published:", data)
 
 # Create a MQTT client
 client = mqtt.Client()
@@ -22,13 +21,13 @@ client = mqtt.Client()
 # Connect to the MQTT broker
 client.connect(broker_address, port)
 
-# Publish sensor data every 5 seconds
+# Publish sensor data every hour
 try:
-    while True:
+    for i in range(24):
         publish_data()
-        time.sleep(5)
+        time.sleep(60 * 60)  # sleep for one hour
 
-# Handle any exceptions that may occur
+# Handle exceptions that may occur
 except KeyboardInterrupt:
     print("Connection closed")
 
