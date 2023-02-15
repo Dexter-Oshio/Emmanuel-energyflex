@@ -10,7 +10,7 @@ auth_token = "" + token + ""
 
 def on_connect(client, userdata, flags, rc):
     print("Connected with result code " + str(rc))
-    client.subscribe("iot/data")
+    client.subscribe("sensor_data")
 
 
 def on_message(client, userdata, msg):
